@@ -6,8 +6,12 @@
 # testing
 /coverage
 
+# development
+/src/**/*.css
+
 # production
 /build
+
 
 # misc
 .DS_Store
