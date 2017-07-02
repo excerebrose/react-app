@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
-app.get('/user', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('App Get Data Here!');
 });
 
