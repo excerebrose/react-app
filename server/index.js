@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const app = express();
 
 // Logging Middleware
-app.use(morgan('combined'))
+app.use(morgan('combined'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3001);
