@@ -3,14 +3,15 @@ const User = require('../models/user').User;
 
 // Create User
 exports.create = (req, res) => {
+  console.log(req.body);
   User.create(req.body, (err, result) => {
     if (err) {
       if (err.code === 11000){
-        return res.json({data: 'email already exist'});
+        return res.json({ error: 'Email already exist!' });
       }
       return res.send(Boom.badImplementation(err));
     }
-    return res.json(result);
+    return res.json({ status: 'Successful Registration' });
   });
 };
 
@@ -58,6 +59,7 @@ exports.userList = (req, res) => {
     users.forEach((user) => {
       userMap.names.push(user.name);
     });
-    res.send(userMap);
+    console.log(userMap);
+    res.json(userMap);
   });
 };
