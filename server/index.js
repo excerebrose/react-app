@@ -24,10 +24,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3001);
 
 // Authentication API Setup
-auth(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+auth(passport);
 routes(app, passport);
 
 // Express only serves static assets in production

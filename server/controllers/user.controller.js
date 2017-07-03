@@ -20,7 +20,7 @@ exports.login = (req, res) => {
     return res.json({ status: 'Not Exist' });
   }
   else if (req.user === 'Invalid password') {
-    return res.json({status: 'Invalid Username and Password'});
+    return res.json({ status: 'Invalid Username and Password' });
   }
   else {
     return res.json(req.user);
@@ -39,6 +39,15 @@ exports.logout = (req, res) => {
 /** authentication check. */
 exports.authCallback = (req, res) => {
   return res.json(req.user);
+};
+
+exports.details = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.json(req.user);
+  }
+  else {
+    return res.json({status: 'Not logged in'});
+  }
 };
 
 exports.userList = (req, res) => {
