@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 const crypto = require('crypto');
 
 // User Schema
-let UserSchema = new Schema({
-  name: { type: String, default: '' },
-  email: { type: String, default: '', unique: true },
-  gender: { type: String, default: '' },
-  hashed_password: { type: String, default: '' },
-  salt: { type: String, default: '' }
+const UserSchema = new Schema({
+  name: { type: String, default: '', required: true },
+  email: { type: String, default: '', unique: true, required: true },
+  gender: { type: String, default: '', required: true },
+  hashed_password: { type: String, default: '', required: true },
+  salt: { type: String, default: '' },
 });
 
 UserSchema
@@ -91,5 +91,5 @@ UserSchema.methods = {
 const user = mongoose.model('User', UserSchema);
 /** export schema */
 module.exports = {
-  User: user
+  User: user,
 };

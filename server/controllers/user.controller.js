@@ -41,3 +41,14 @@ exports.authCallback = (req, res) => {
   return res.json(req.user);
 };
 
+exports.userList = (req, res) => {
+  User.find({}, (err, users) => {
+    const userMap = {
+      names: [],
+    };
+    users.forEach((user) => {
+      userMap.names.push(user.name);
+    });
+    res.send(userMap);
+  });
+};

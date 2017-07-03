@@ -6,4 +6,5 @@ module.exports = (app, passport) => {
     User.login);
   app.post('/create', User.create);
   app.get('/logout', User.logout);
+  app.get('/api/list', User.userList);
 };
