@@ -44,7 +44,7 @@ class UserList extends Component {
     return(
       <div className="user-list">
         <h2> Registered Users </h2>
-        {this.state.users?
+        {this.state.users && this.state.users.length>0?
           <ListGroup>
               { 
                 this.state.users.map((user,index) => {
@@ -55,7 +55,7 @@ class UserList extends Component {
             }
           </ListGroup>
           :
-          <h2>No Users Registered</h2>
+          <h3>No Users Registered</h3>
         }
       </div>
     );
