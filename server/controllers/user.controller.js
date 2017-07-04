@@ -3,7 +3,6 @@ const User = require('../models/user').User;
 
 // Create User
 exports.create = (req, res) => {
-  console.log(req.body);
   User.create(req.body, (err, result) => {
     if (err) {
       if (err.code === 11000){
@@ -18,10 +17,10 @@ exports.create = (req, res) => {
 // Login
 exports.login = (req, res) => {
   if (req.user === 'Unknown user') {
-    return res.json({ status: 'Not Exist' });
+    return res.json({ error: 'Not Exist' });
   }
   else if (req.user === 'Invalid password') {
-    return res.json({ status: 'Invalid Username and Password' });
+    return res.json({ error: 'Invalid Username and Password' });
   }
   else {
     return res.json(req.user);

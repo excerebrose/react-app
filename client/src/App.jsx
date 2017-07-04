@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Routes from './Routes';
+import { ConnectedRouter } from 'connected-react-router'
+
 import './App.css';
 
-class App extends Component {
-  render() {
+const App = ({ history }) => {
     return (
-      <div className='app'>
+      <ConnectedRouter className='app' history={history}>
         <Routes />
-      </div>
+      </ConnectedRouter>
     );
-  }
 }
 export default App;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 class UserList extends Component {
   constructor(props){
@@ -7,9 +8,10 @@ class UserList extends Component {
     this.state = {
       users: null,
     };
+    this._handleFetch = this._handleFetch.bind(this);
   }
 
-  componentDidMount() {
+  _handleFetch() {
     fetch('/api/list', { 
         headers: {
           'Accept': 'application/json',
@@ -29,6 +31,13 @@ class UserList extends Component {
           console.log(data.errors);
         }
       });
+   }
+  componentDidMount() {
+    this._handleFetch();
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.reload !== this.props.reload)
+      this._handleFetch();
   }
 
   render() {
@@ -40,7 +49,7 @@ class UserList extends Component {
               { 
                 this.state.users.map((user,index) => {
                   return(
-                    <ListGroupItem>{user}</ListGroupItem>
+                    <ListGroupItem key={index}>{user}</ListGroupItem>
                   )
                 })
             }
@@ -53,4 +62,10 @@ class UserList extends Component {
   }
 };
 
-export default UserList;
+const mapStateToProps = (state) => (
+  {
+    reload: state.reload,
+  }
+);
+
+export default connect(mapStateToProps, null)(UserList);

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, FormControl, Col, ControlLabel, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { reload } from '../../actions/reload';
+import { onLogin } from '../../actions/authenticate';
 
-class Signup extends Component {
+class Login extends Component {
   constructor(props){
     super(props);
     this.state = {
       email: '',
-      gender: 'male',
-      name: '',
       password: '',
       errors: null,
     }
@@ -18,14 +16,14 @@ class Signup extends Component {
   } 
   _handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/create', { 
+    fetch('/api/login', { 
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           'Cache-Control': 'no-cache',
         },
-        body: JSON.stringify(this.state),
+        body: JSON.stringify({email: this.state.email, password: this.state.password}),
       })
       .then((res) => {
         return res.json();
@@ -37,22 +35,14 @@ class Signup extends Component {
           });
         }
         else {
-          alert(data.status);
-          this.setState({
-            email: '',
-            name: '',
-            gender: 'male',
-            password: '',
-            errors: null,
-          });
-          this.props.onReload();
+          this.props.onLogin(data);
         }
       });
   }
   render() {
     return (
-      <div className="signup-form">
-      <h2> Signup form </h2>
+      <div className="Login-form">
+      <h2> Login form </h2>
       <Form horizontal onSubmit={this._handleSubmit}>
         {this.state.errors?
           <Alert bsStyle="danger">
@@ -61,27 +51,6 @@ class Signup extends Component {
           : 
           null
         }
-         <FormGroup controlId="formHorizontalName">
-          <Col componentClass={ControlLabel} sm={2}>
-            Name
-          </Col>
-          <Col sm={10}>
-            <FormControl value={this.state.name} type="name" onChange={(e) => this.setState({name: e.target.value})} required  />
-          </Col>
-        </FormGroup>
-
-         <FormGroup controlId="formHorizontalEmail">
-          <Col componentClass={ControlLabel} sm={2}>
-            Gender
-          </Col>
-          <Col sm={10}>
-            <FormControl value={this.state.gender} componentClass="select" onChange={(e) => this.setState({gender: e.target.value})}required>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </FormControl>
-          </Col>
-        </FormGroup>
-
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={2}>
             Email
@@ -110,7 +79,7 @@ class Signup extends Component {
               bsSize="large"
               block
               >
-              Register
+              Login
             </Button>
           </Col>
         </FormGroup>
@@ -122,7 +91,7 @@ class Signup extends Component {
 
 const mapDispatchToProps = (dispatch) => (
   {
-    onReload: () => dispatch(reload()),
+    onLogin: (payload) => dispatch(onLogin(payload)),
   }
 )
-export default connect(null, mapDispatchToProps)(Signup);
+export default connect(null, mapDispatchToProps)(Login);
