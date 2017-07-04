@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, FormControl, Col, ControlLabel, Button, Alert } from 'react-bootstrap';
 
-import './Signup.css';
-
 class Signup extends Component {
   constructor(props){
     super(props);
@@ -50,6 +48,8 @@ class Signup extends Component {
   }
   render() {
     return (
+      <div className="signup-form">
+      <h2> Signup form </h2>
       <Form horizontal onSubmit={this._handleSubmit}>
         {this.state.errors?
           <Alert bsStyle="danger">
@@ -101,13 +101,18 @@ class Signup extends Component {
 
         <FormGroup>
           <Col smOffset={2} sm={10}>
-            <Button  bsStyle="primary" type="submit">
+            <Button  
+              bsStyle="primary" 
+              type="submit"
+              bsSize="large"
+              block
+              >
               Register
             </Button>
           </Col>
         </FormGroup>
       </Form>
-
+    </div>
     );
   }
 }
