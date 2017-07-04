@@ -33,7 +33,7 @@ exports.login = (req, res) => {
 
 exports.logout = (req, res) => {
   req.logout();
-  return res.json(req.user);
+  return res.json({ status: 'Logged out!' });
 };
 
 /** authentication check. */

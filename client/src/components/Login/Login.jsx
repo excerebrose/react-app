@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, FormGroup, FormControl, Col, ControlLabel, Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { onLogin } from '../../actions/authenticate';
+import './Login.css';
 
 class Login extends Component {
   constructor(props){
@@ -41,7 +42,7 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="Login-form">
+      <div className="Login-form" >
       <h2> Login form </h2>
       <Form horizontal onSubmit={this._handleSubmit}>
         {this.state.errors?

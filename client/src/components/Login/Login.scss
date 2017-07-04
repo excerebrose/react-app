@@ -1,0 +1,8 @@
+.Login-form {
+  width: 60%;
+  margin-left: 20%;
+  @media screen and (max-width:758px) {
+    width: 100%;
+    margin-left: 0;
+  }
+}
